@@ -33,7 +33,7 @@ const padZero = (num: number) => num.toString().padStart(2, '0');
 
 @Pipe({ name: 'time', standalone: true })
 export class TimePipe implements PipeTransform {
-  transform(value: number|null = null): string {
+  transform(value: number | null = null): string {
     return TimePipe.formatTime(value ?? 0);
   }
 
@@ -44,7 +44,7 @@ export class TimePipe implements PipeTransform {
     // const minutes = Math.floor((time % 3600000) / 60000);
     const minutes = Math.floor((time % 3600) / 60);
     // const seconds = Math.floor((time % 60000) / 1000);
-    const seconds = Math.floor((time % 60));
+    const seconds = Math.floor(time % 60);
     return `${padZero(hours)}:${padZero(minutes)}:${padZero(seconds)}`;
   }
 }
@@ -58,11 +58,11 @@ export class TimePipe implements PipeTransform {
       <button (click)="addRow()">Add Row</button>
     </div>
     <div *ngFor="let row of rows; let i = index">
-      <input type="checkbox">
+      <input type="checkbox" (click)="lockTask(row)">
       <input type="text">
       <button (click)="startStopwatch(row)">Start/Stop</button>
       <!-- <span>{{ row.stopWatch }}</span> -->
-      <span style="margin-left: 5px">{{ row.timer$|async|time }}</span>
+      <span [ngClass]="{'timer-paused':row.checked}" style="margin-left: 5px">{{ row.timer$|async|time }}</span>
     </div>
     <button (click)="reset()">Reset</button>
   `,
@@ -77,6 +77,10 @@ export class App {
 
   reset() {
     this.rows = [new Row()];
+  }
+
+  lockTask(row: Row) {
+    row.checked = !row.checked;
   }
 
   startStopwatch(row: Row) {
