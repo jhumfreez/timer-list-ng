@@ -84,14 +84,6 @@ export class App {
 
   startStopwatch(row: Row) {
     row.ticking = !row.ticking;
-    // This doesn't work
-    // row.stopWatch = '00:00:00';
-    // const startTime = Date.now();
-    // this.intervalId = setInterval(() => {
-    //   const currentTime = Date.now();
-    //   const elapsedTime = currentTime - startTime;
-    //   row.stopWatch = this.formatTime(elapsedTime);
-    // }, 1000);
   }
 }
 
