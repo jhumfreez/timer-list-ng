@@ -38,12 +38,8 @@ export class TimePipe implements PipeTransform {
   }
 
   static formatTime(time: number) {
-    // Note: AI generated
-    // const hours = Math.floor(time / 3600000);
     const hours = Math.floor(time / 3600);
-    // const minutes = Math.floor((time % 3600000) / 60000);
     const minutes = Math.floor((time % 3600) / 60);
-    // const seconds = Math.floor((time % 60000) / 1000);
     const seconds = Math.floor(time % 60);
     return `${padZero(hours)}:${padZero(minutes)}:${padZero(seconds)}`;
   }
@@ -80,7 +76,7 @@ export class App {
   }
 
   lockTask(row: Row) {
-    if(row.ticking && !row.checked){
+    if (row.ticking && !row.checked) {
       row.ticking = false;
     }
     row.checked = !row.checked;
