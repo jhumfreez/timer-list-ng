@@ -50,17 +50,17 @@ export class TimePipe implements PipeTransform {
   standalone: true,
   imports: [CommonModule, TimePipe],
   template: `
-    <div>
-      <button (click)="addRow()">Add Row</button>
-    </div>
-    <div *ngFor="let row of rows; let i = index">
-      <input type="checkbox" (click)="lockTask(row)">
-      <input type="text">
-      <button [disabled]="row.checked" (click)="startStopwatch(row)">Start/Stop</button>
-      <!-- <span>{{ row.stopWatch }}</span> -->
-      <span [ngClass]="{'timer-paused':row.checked, 'timer-active':row.ticking}" style="margin-left: 5px">{{ row.timer$|async|time }}</span>
-    </div>
-    <button (click)="reset()">Reset</button>
+  <div>
+    <button style="margin-bottom:10px" (click)="addRow()">Add Row</button>
+  </div>
+  <div *ngFor="let row of rows; let i = index">
+    <input type="checkbox" (click)="lockTask(row)">
+    <input type="text">
+    <button [disabled]="row.checked" (click)="startStopwatch(row)">Start/Stop</button>
+    <!-- <span>{{ row.stopWatch }}</span> -->
+    <span [ngClass]="{'timer-paused':row.checked, 'timer-active':row.ticking}" style="margin-left: 5px">{{ row.timer$|async|time }}</span>
+  </div>
+    <button style="margin-top:20px" (click)="reset()">Reset</button>
   `,
 })
 export class App {
