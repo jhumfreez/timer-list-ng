@@ -2,3 +2,7 @@
 .timer-paused {
   color: red;
 }
+
+.timer-active {
+  color: rgb(39, 189, 19);
+}

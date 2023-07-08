@@ -60,9 +60,9 @@ export class TimePipe implements PipeTransform {
     <div *ngFor="let row of rows; let i = index">
       <input type="checkbox" (click)="lockTask(row)">
       <input type="text">
-      <button (click)="startStopwatch(row)">Start/Stop</button>
+      <button [disabled]="row.checked" (click)="startStopwatch(row)">Start/Stop</button>
       <!-- <span>{{ row.stopWatch }}</span> -->
-      <span [ngClass]="{'timer-paused':row.checked}" style="margin-left: 5px">{{ row.timer$|async|time }}</span>
+      <span [ngClass]="{'timer-paused':row.checked, 'timer-active':row.ticking}" style="margin-left: 5px">{{ row.timer$|async|time }}</span>
     </div>
     <button (click)="reset()">Reset</button>
   `,
@@ -80,6 +80,9 @@ export class App {
   }
 
   lockTask(row: Row) {
+    if(row.ticking && !row.checked){
+      row.ticking = false;
+    }
     row.checked = !row.checked;
   }
 
